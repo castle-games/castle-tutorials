@@ -64,11 +64,11 @@ On the next screen, you will have a chance to set your project's name. You may a
 
 Once you do this, you will be greeted with the following screen, where you can click 'Open Project' to launch your project in it's current form:
 
-![Ready to start making new project](open-new-project.png)
+![Ready to start making new project](open-created-project.png)
 
 The initial version of your project should look like this:
 
-![Initial new project](initial-new-project.png)
+![Initial new project](initial-created-project.png)
 
 We're now ready to start writing some code! Open the 'main.lua' file under the project directory in your code editor and check out the current state of the code: 
 
