@@ -16,7 +16,7 @@ Here's a list of things that we can hope to learn in this first tutorial:
 
 ## Installing and setting up Castle
 
-*You can skip this step if you've already installed Castle and have a user account.*
+*You can skip this section if you've already installed Castle and have a user account.*
 
 You can download the latest release of Castle from Castle's [home page](https://castle.games/).
 
@@ -38,7 +38,7 @@ You should now be ready to explore and play games on Castle. You probably came t
 
 ### Code editor
 
-Currently, games for Castle are made using the [Lua](https://www.lua.org/start.html) programming language. If you're familiar with programming already, the language should be easy to learn while making games on Castle. To write Lua code, you will need a code editor. The Castle team recommends [VS Code](https://code.visualstudio.com/) with the [vscode-lua](https://marketplace.visualstudio.com/items?itemName=trixnz.vscode-lua) extension. If you're already familiar with a code editor that supports Lua, you could continue using it! Vim, Notepad++, Sublime Text, Emacs are all popular code editors that have Lua support. In some cases these editors may need a plugin or some additional setup to enable syntax highlighting for Lua.
+Currently, games for Castle are made using the [Lua](https://www.lua.org/start.html) programming language. To write Lua code, you will need a code editor. The Castle team recommends [VS Code](https://code.visualstudio.com/) with the [vscode-lua](https://marketplace.visualstudio.com/items?itemName=trixnz.vscode-lua) extension. If you're already familiar with a code editor that supports Lua, you could continue using it! Vim, Notepad++, Sublime Text, Emacs are all popular code editors that have Lua support. In some cases these editors may need a plugin or some additional setup to enable syntax highlighting for Lua.
 
 ### Image editor (optional)
 
@@ -74,7 +74,7 @@ We're now ready to start writing some code! Open the 'main.lua' file under the p
 
 ![Initial code](initial-code.png)
 
-This code will make sense to you real soon--or it may make sense to you already! The project is currently only showing text, so let's start by making it draw some shapes!
+The project is currently only showing text, so let's start by making it draw some shapes!
 
 ## Drawing shapes
 
@@ -86,7 +86,7 @@ function love.draw()
 end
 ```
 
-Save the file. Now hit the 'Reload Project' button in Castle, or hit 'Ctrl + R' (on Windows) or 'Cmd + R' (on macOS). Castle will reload your project, using your modified code. Make sure you saved the new contents of the file first, or Castle won't be able to pick up the changes you made in your code editor! You should now see the following:
+Make sure to have removed the old code, since we want to start from scratch. Save the file. Now hit the 'Reload Project' button in Castle, or hit 'Ctrl + R' (on Windows) or 'Cmd + R' (on macOS). Castle will reload your project, using your modified code. Make sure you saved the new contents of the file before reloading, or Castle won't be able to pick up the changes you made in your code editor! You should now see the following:
 
 ![First code change](first-change.png)
 
@@ -99,3 +99,85 @@ So, back to `love.draw`. When you define the `love.draw` function, LÖVE underst
 Inside `love.draw`, we use the [`love.graphics.circle`](https://love2d.org/wiki/love.graphics.circle) function to draw a circle on screen. It takes 4 arguments: a drawing `mode` (in our case we use `'fill'` to draw a filled circle, as opposed to just an outline), `x` and `y` coordinates and a `radius`. The coordinate system starts with (0, 0) as the top-left of the game window, with the X-coordinate increasing rightward and the Y-coordinate increasing downward. By default, the width of the game window is 850 units and the height is 400 units. So with the values we put in, we get a little circle on the top-left!
 
 *Note: A 'unit' here doesn't necessarily correspond to on-screen pixels of the user's monitor, since the user is free to resize their Castle window (and thus the game window). In Castle, you don't have to worry about these resizes and can continue assuming 850x450 units--Castle will automatically scale your game's drawing to fit. We will learn later how to use different sizes or even have our own resize logic.*
+
+The circle is currently white, but let's try making it a nice magenta. Change the code to the following:
+
+```lua
+function love.draw()
+    love.graphics.setColor(0.8, 0, 0.8)
+    love.graphics.circle('fill', 40, 40, 20)
+end
+```
+
+We just added a [`love.graphics.setColor`](https://love2d.org/wiki/love.graphics.setColor) call. This function affects the color used in the draw calls after it. It takes 3 arguments: the red, green and blue components of the color respectively. It takes an optional 4th argument that can be used to set the opacity of the color. Each component must be in the 0 to 1 range. So with the values above, we get magenta:
+
+![Change color](change-color.png)
+
+Great, so we have a circle on screen, but can we move it around? Let's try it!
+
+## Reacting to input
+
+Let's try to let the user move the circle around with their keyboard. We used a fixed value of (40, 40) for the position of the circle, but if we use a varying value for that, our circle should move! So let's first add some variables to store this. At the top of your file, add the following:
+
+```lua
+local x, y = 40, 40
+```
+
+Then change your `love.graphics.circle` call to this:
+
+```lua
+    love.graphics.circle('fill', x, y, 20)
+```
+
+If you reload now your game should be the same as before, and the keyboard doesn't affect anything yet! We need to listen for keyboard input and affect `x` and `y` accordingly. Let's add the following before `love.draw`:
+
+```lua
+function love.update(dt)
+    if love.keyboard.isDown('left') then
+        x = x - 120 * dt
+    end
+    if love.keyboard.isDown('right') then
+        x = x + 120 * dt
+    end
+    if love.keyboard.isDown('up') then
+        y = y - 120 * dt
+    end
+    if love.keyboard.isDown('down') then
+        y = y + 120 * dt
+    end
+end
+```
+
+[`love.update`](https://love2d.org/wiki/love.update), like `love.draw`, is a function that LÖVE will call if you define it. In this case the function is called every frame and given the argument `dt` which is the amount of time that elapsed since the last frame in seconds. Inside, we check if each of the left, right, up or down arrow keys is pressed and update the `x` or `y` values accordingly. In this case we pick a speed of 120 units per second. If the left arrow key is down, we decrease the `x` coordinate by the number of units left the circle would've moved in the last frame. We perform this logic for each arrow key and the coordinate it affects.
+
+If you reload your game now, you should be able to move the circle around with the arrow keys!
+
+If both `love.update` and `love.draw` are called every frame, why are they separate? The idea is to only put logic that changes your game state in `love.update`. In this case the state is our `x` and `y` values. And then, only put logic that draws the current state on the screen in `love.draw`. This way, Castle could stop calling `love.update` but still call `love.draw` in order to pause your game. Or it could go the other way round: call `love.update` but not `love.draw`, to run your game in the background but not draw it for example.
+
+To recap, here is the entire code for the game at this point:
+
+```lua
+local x, y = 40, 40
+
+function love.update(dt)
+    if love.keyboard.isDown('left') then
+        x = x - 120 * dt
+    end
+    if love.keyboard.isDown('right') then
+        x = x + 120 * dt
+    end
+    if love.keyboard.isDown('up') then
+        y = y - 120 * dt
+    end
+    if love.keyboard.isDown('down') then
+        y = y + 120 * dt
+    end
+end
+
+function love.draw()
+    love.graphics.setColor(0.8, 0, 0.8)
+    love.graphics.circle('fill', x, y, 20)
+end
+```
+
+Circles are nice, but let's now try drawing some images!
