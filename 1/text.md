@@ -24,7 +24,7 @@ If you're on **Windows**, this will give you a file named like 'Castle-\<version
 
 For **macOS**, you will get a file like 'Castle-\<version\>.zip'. Extract this and put the 'Castle.app' file inside in your macOS Applications folder. Putting it in the Applications folder is necessary for auto-updates to work properly.
 
-From now on, Castle will automatically update itself, and you won't have to repeat this process for this computer!
+From now on, Castle can automatically check for updates, prompt you and update itself. You won't have to repeat the installation process on this computer!
 
 When you first launch Castle, you will see the following screen:
 
