@@ -77,3 +77,25 @@ We're now ready to start writing some code! Open the 'main.lua' file under the p
 This code will make sense to you real soon--or it may make sense to you already! The project is currently only showing text, so let's start by making it draw some shapes!
 
 ## Drawing shapes
+
+The most basic type of drawing involves drawing shapes such as circles, rectangles and ellipses. Let's start off by drawing a circle. Delete all the code currently in 'main.lua' and replace it with just the following 3 lines (we'll dig in and actually understand the code soon):
+
+```lua
+function love.draw()
+    love.graphics.circle('fill', 40, 40, 20)
+end
+```
+
+Save the file. Now hit the 'Reload Project' button in Castle, or hit 'Ctrl + R' (on Windows) or 'Cmd + R' (on macOS). Castle will reload your project, using your modified code. Make sure you saved the new contents of the file first, or Castle won't be able to pick up the changes you made in your code editor! You should now see the following:
+
+![First code change](first-change.png)
+
+Congratulations! You've made your first Castle game code change!
+
+Now let's take a moment to understand the code we wrote. First, we define a function named `love.draw`. What is love? In this case, it's [LÖVE](https://love2d.org/), the Lua game framework Castle has built-in to let you code games. LÖVE has a ton of features and functions, which you can learn more about on [its wiki](https://love2d.org/wiki/Main_Page). There's a lot there, but you don't have to worry about digging into it just yet. This tutorial will explain each of the LÖVE features used as they come up. But it's good to know that all of the other LÖVE features are available in Castle, for when you want to go beyond this tutorial and expand your games on your own!
+
+So, back to `love.draw`. When you define the `love.draw` function, LÖVE understands that it needs to call this function whenever it's drawing the screen to display your game. This happens 60 times a second, to keep your game running smoothly. You can [read more about `love.draw`](https://love2d.org/wiki/love.draw) in the LÖVE wiki. From now on, the tutorial will link any LÖVE feature names to the relevant wiki section for when you want to read more.
+
+Inside this function, we use the [`love.graphics.circle`](https://love2d.org/wiki/love.graphics.circle) function to draw a circle on screen. It takes 4 arguments: a drawing `mode` (in our case we use `'fill'` to draw a filled circle, as opposed to just an outline), `x` and `y` coordinates and a `radius`. The coordinate system starts with (0, 0) in the top-left of the game window, with the X-coordinate increasing rightward and the Y-coordinate increasing downward. By default, the width of the game window is 850 units and the height is 400 units. So with the values `40`, `40` for `x` and `y`; and `20` for the radius, we get a little circle on the top-left!
+
+*Note: A 'unit' here doesn't necessarily correspond to on-screen pixels of the user's monitor, since the user is free to resize their Castle window (and thus the game window). In Castle, you don't have to worry about these resizes and can continue assuming 850x450 units--Castle will automatically scale your game's drawing to fit. We will learn later how to use different sizes or even have our own resize logic.*
