@@ -12,7 +12,7 @@ Here's a list of things that we can hope to learn in this first tutorial:
 - Drawing shapes
 - Reacting to input
 - Drawing images
-- Publishing your game to Castle
+- Adding your game to your profile
 
 ## Installing and setting up Castle
 
@@ -181,3 +181,114 @@ end
 ```
 
 Circles are nice, but let's now try drawing some images!
+
+## Drawing images
+
+First we will have to acquire or create an image to draw. For this tutorial let's try using the following image, from http://millionthvector.blogspot.com/p/free-sprites.html:
+
+![ship.png](ship.png)
+
+Put the image with a simple file name such as 'ship.png' next to your 'main.lua' file in your project directory.
+
+Now we'll have to add code to load the image into the game. Add the following line at the top of 'main.lua':
+
+```lua
+local shipImage = love.graphics.newImage('ship.png')
+```
+
+We're using [`love.graphics.newImage`](https://love2d.org/wiki/love.graphics.newImage) to load the image as an [`Image`](https://love2d.org/wiki/Image) object. Make sure to use the file name of the image you put in your project directory. The object can then be drawn in the `love.draw` function. Let's remove the existing contents of the `love.draw` function and replace it with:
+
+```lua
+    love.graphics.draw(shipImage, x, y)
+```
+
+We use [`love.graphics.draw`](https://love2d.org/wiki/love.graphics.draw) to draw our image object, with the same `x` and `y` values that we used for the circle before. This should give the following result:
+
+![Draw image](draw-image.png)
+
+Again, for reference, here is the entire code of the game at this point:
+
+```lua
+local shipImage = love.graphics.newImage('ship.png')
+
+local x, y = 40, 40
+
+function love.update(dt)
+    if love.keyboard.isDown('left') then
+        x = x - 120 * dt
+    end
+    if love.keyboard.isDown('right') then
+        x = x + 120 * dt
+    end
+    if love.keyboard.isDown('up') then
+        y = y - 120 * dt
+    end
+    if love.keyboard.isDown('down') then
+        y = y + 120 * dt
+    end
+end
+
+function love.draw()
+    love.graphics.draw(shipImage, x, y)
+end
+```
+
+That'll be all for our first game on Castle! Now let's add our game to our profile so others can check it out.
+
+## Adding your game to your profile
+
+First, we'll want to update the description and cover image of our game. Open the file with the '.castle' extension in your project directory. You should be able to use your code editor to open this file. You will see something like the following:
+
+```yaml
+main: main.lua
+title: My Tutorial 1
+owner: nikki
+```
+
+The `title` field will have the title you set in the 'Create Project' screen initially, and the `owner` field will have your username. Let's add a description and a cover image for our game. Add the following line at the bottom of the file, to give a description for your game:
+
+```yaml
+description: I made this game based on Castle tutorial 1! Use your arrow keys to move the spaceship around.
+```
+
+You can use your own description. The description should be on one line for the file to be read properly by Castle. Now let's add a cover image. The cover image is used for the display of your game as a game card on Castle, such as on the home page, on your profile, or in search results. We'll use the following cover image in this example, but feel free to use any image of your own:
+
+![cover.png](cover.png)
+
+Put this image with a name such as 'cover.png' in your project directory. Then add the following line to your '.castle' file, referencing the same file name:
+
+```yaml
+coverImage: cover.png
+```
+
+For reference, here is what the '.castle' file may now look like (make sure to use your own username!):
+
+```yaml
+main: main.lua
+title: My Tutorial 1
+owner: nikki
+description: I made this game based on Castle tutorial 1! Use your arrow keys to move the spaceship around.
+coverImage: cover.png
+```
+
+Now let's add the game to our profile. First, navigate to your profile by clicking on your username in the sidebar:
+
+![Click username](click-username.png)
+
+Then, click 'Add game' on that page:
+
+![Click 'Add game'](click-add-game.png)
+
+This should bring you to the 'Add a Game' screen. Here, click 'Change folder' and select your project directory. You will get a chance to verify the title, description and cover image of your game with the preview below. If everything looks right, click 'Upload and Add Game':
+
+!['Add a Game' screen](add-game.png)
+
+Castle will upload the files for your game to Castle's servers and add the game to your profile. After this, you will be taken to your profile, where you will see a new game card for your game:
+
+![Game card on profile](game-card.png)
+
+Click the card to play your game! Any Castle user can now go to your profile and find the game to play. You can also use the 'Copy Link' feature on the game card to copy a link to your game and send it to other users:
+
+![Click 'Copy Link'](copy-link.png)
+
+Congratulations! You've made a Castle game and added it to your profile. The next tutorial will show you how to add Castle-specific features to your game, such as storing data in a database and making posts.
