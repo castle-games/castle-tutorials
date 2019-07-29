@@ -202,7 +202,7 @@ We're using [`love.graphics.newImage`](https://love2d.org/wiki/love.graphics.new
     love.graphics.draw(shipImage, x, y)
 ```
 
-We use [`love.graphics.draw`](https://love2d.org/wiki/love.graphics.draw) to draw our image object, with the same `x` and `y` values that we used for the circle before. This should give the following result:
+We use [`love.graphics.draw`](https://love2d.org/wiki/love.graphics.draw) to draw our image object, with the same `x` and `y` values that we used for the circle before. This should give the following result. You'll be able to move the ship around with the arrow keys:
 
 ![Draw image](draw-image.png)
 
