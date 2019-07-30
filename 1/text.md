@@ -1,6 +1,6 @@
 # Tutorial 1
 
-Welcome to the first in a series of tutorials about making games on Castle! In this series we'll first get started with the basics: getting Castle setup, and learning how to draw graphics and react to user input, which form the basis of games. After that, we'll get into the unique social features offered by Castle's platform. These include displaying user avatars in your game, allowing your game to make posts and save data in Castle's database, and making your game multiplayer.
+Welcome to the first in a series of tutorials about making games on Castle! In this series we'll get started with the basics: getting Castle set up, and learning how to draw graphics and react to user input, which form the basis of games. After that, we'll get into the unique social features that Castle offers. These include displaying user avatars in your game, allowing your game to make posts and save data in Castle's database, and making your game multiplayer.
 
 ## Learning goals
 
@@ -22,9 +22,9 @@ You can download the latest release of Castle from Castle's [home page](https://
 
 If you're on **Windows**, this will give you a file named like 'Castle-\<version\>-Setup.exe', which you can launch and follow the instructions to install Castle.
 
-For **macOS**, you will get a file like 'Castle-\<version\>.zip'. Extract this and put the 'Castle.app' file inside in your macOS Applications folder. Putting it in the Applications folder is necessary for auto-updates to work properly.
+For **macOS**, you will get a file like 'Castle-\<version\>.zip'. Extract this and put the 'Castle.app' file inside of your macOS Applications folder. Putting it in the Applications folder is necessary for auto-updates to work properly.
 
-From now on, Castle can automatically check for updates, prompt you and update itself. You won't have to repeat the installation process on this computer!
+Castle will automatically check for updates, so you won't have to repeat the installation process on this computer!
 
 When you first launch Castle, you will see the following screen:
 
@@ -38,15 +38,13 @@ You should now be ready to explore and play games on Castle. You probably came t
 
 ### Code editor
 
-Currently, games for Castle are made using the [Lua](https://www.lua.org/start.html) programming language. To write Lua code, you will need a code editor. The Castle team recommends [VS Code](https://code.visualstudio.com/) with the [vscode-lua](https://marketplace.visualstudio.com/items?itemName=trixnz.vscode-lua) extension. If you're already familiar with a code editor that supports Lua, you could continue using it. Vim, Notepad++, Sublime Text, Emacs are all popular code editors that have Lua support. In some cases these editors may need a plugin or some additional setup to enable syntax highlighting for Lua.
+Castle games are made using the [Lua](https://www.lua.org/start.html) programming language. To write Lua code, you will need a code editor. The Castle team recommends [VS Code](https://code.visualstudio.com/) with the [vscode-lua](https://marketplace.visualstudio.com/items?itemName=trixnz.vscode-lua) extension. If you're already familiar with a code editor that supports Lua, you could continue using it. Vim, Notepad++, Sublime Text, and Emacs are all popular code editors that have Lua support. In some cases these editors may need a plugin or some additional setup to enable syntax highlighting for Lua.
 
 ### Image editor (optional)
 
-Usually game elements are displayed using images. For example, if you're making a Pac-Man clone, you may want to draw an image for Pac-Man, one image for each kind of ghost, and so on. To create or edit such images you will need an image editor. Any editor that exports common file formats such as JPEG or PNG will do (PNG is recommended to to retain image quality).
+Usually game elements are displayed using images. For example, if you're making a Pac-Man clone, you may want to draw an image for Pac-Man, one image for each kind of ghost, and so on. To create or edit such images you will need an image editor. Any editor that exports common file formats such as JPEG or PNG will do (PNG is recommended to retain image quality).
 
 You can do without an image editor if you find pre-made images on the web, or if you want to just render abstract shapes such as circles and rectangles which you can do with pure code.
-
-Now that we've gotten that out of the way, let's actually start our Castle game project!
 
 ## Starting a new project
 
@@ -54,7 +52,7 @@ In Castle's sidebar, click 'Create' to navigate to the Create screen:
 
 ![Click 'Create'](click-create.png)
 
-On the Create screen, you will be presented with many options for starting a new project or opening an existing one. These include templates that start your game with some pre-existing code and images. In this tutorial we want to learn how to write our own code to start things off, so let's click on the 'blank' option:
+On the Create screen, you will be presented with many options for starting a new project or opening an existing one. These include templates that start your game with some pre-existing code and images. In this tutorial we want to learn how to write our own code to start things off, so let's click on the 'New blank project' option:
 
 ![Click 'blank'](click-blank.png)
 
@@ -62,7 +60,7 @@ On the next screen, you will have a chance to set your project's name. You may a
 
 !['Create Project' screen](create-project.png)
 
-Once you do this, you will be greeted with the following screen, where you can click 'Open Project' to launch your project in it's current form:
+Once you do this, you will be greeted with the following screen, where you can click 'Run game!' to launch your project in it's current form:
 
 ![Ready to start making new project](open-created-project.png)
 
@@ -109,7 +107,7 @@ function love.draw()
 end
 ```
 
-We just added a [`love.graphics.setColor`](https://love2d.org/wiki/love.graphics.setColor) call. This function affects the color used in the draw calls after it. It takes 3 arguments: the red, green and blue components of the color respectively. It takes an optional 4th argument that can be used to set the opacity of the color. Each component must be in the 0 to 1 range. So with the values above, we get magenta:
+We just added a [`love.graphics.setColor`](https://love2d.org/wiki/love.graphics.setColor) call. This function affects the color used in the draw calls after it. It takes 3 arguments: the red, green and blue components of the color respectively. It takes an optional 4th argument that can be used to set the opacity of the color. Each component must be in the 0 to 1 range. So with the values above (80% red, 0% green, 80% blue), we get magenta:
 
 ![Change color](change-color.png)
 
@@ -129,7 +127,7 @@ Then change your `love.graphics.circle` call to this:
     love.graphics.circle('fill', x, y, 20)
 ```
 
-If you reload now your game should be the same as before, and the keyboard doesn't affect anything yet. We need to listen for keyboard input and affect `x` and `y` accordingly. Let's add the following before `love.draw`:
+If you reload now your game should be the same as before, and the keyboard doesn't affect anything yet. We need to listen for keyboard input and change `x` and `y` accordingly. Let's add the following before `love.draw`:
 
 ```lua
 function love.update(dt)
@@ -184,11 +182,11 @@ Circles are nice, but let's now try drawing some images!
 
 ## Drawing images
 
-First we will have to acquire or create an image to draw. For this tutorial let's try using the following image, from http://millionthvector.blogspot.com/p/free-sprites.html:
+First we will have to acquire or create an image to draw. For this tutorial let's use the following image, from http://millionthvector.blogspot.com/p/free-sprites.html:
 
 ![ship.png](ship.png)
 
-Put the image with a simple file name such as 'ship.png' next to your 'main.lua' file in your project directory.
+Name the file 'ship.png' ant put it next to your 'main.lua' file in your project directory.
 
 Now we'll have to add code to load the image into the game. Add the following line at the top of 'main.lua':
 
@@ -196,7 +194,7 @@ Now we'll have to add code to load the image into the game. Add the following li
 local shipImage = love.graphics.newImage('ship.png')
 ```
 
-We're using [`love.graphics.newImage`](https://love2d.org/wiki/love.graphics.newImage) to load the image as an [`Image`](https://love2d.org/wiki/Image) object. Make sure to use the file name of the image you put in your project directory. The object can then be drawn in the `love.draw` function. Let's remove the existing contents of the `love.draw` function and replace it with:
+We're using [`love.graphics.newImage`](https://love2d.org/wiki/love.graphics.newImage) to load the image as an [`Image`](https://love2d.org/wiki/Image) object. The object can then be drawn in the `love.draw` function. Let's remove the existing contents of the `love.draw` function and replace it with:
 
 ```lua
     love.graphics.draw(shipImage, x, y)
