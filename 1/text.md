@@ -186,7 +186,7 @@ First we will have to acquire or create an image to draw. For this tutorial let'
 
 ![ship.png](ship.png)
 
-Name the file 'ship.png' ant put it next to your 'main.lua' file in your project directory.
+Name the file 'ship.png' and put it next to your 'main.lua' file in your project directory.
 
 Now we'll have to add code to load the image into the game. Add the following line at the top of 'main.lua':
 
