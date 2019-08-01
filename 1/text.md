@@ -16,7 +16,7 @@ Here's a list of things that we can hope to learn in this first tutorial:
 
 ## Installing and setting up Castle
 
-*You can skip this section if you've already installed Castle and have a user account.*
+_You can skip this section if you've already installed Castle and have a user account._
 
 You can download the latest release of Castle from Castle's [home page](https://castle.games/).
 
@@ -58,7 +58,7 @@ On the Create screen, you will be presented with many options for starting a new
 
 ![Click 'blank'](click-blank.png)
 
-On the next screen, you will have a chance to set your project's name. You may also want to navigate to a different directory to save your project's files in. Under this directory, Castle will create a *new directory* for your project, and the project's files wil reside within that new directory. Projects usually involve at least one '.castle' file and one '.lua' file, if not more files, so it makes sense to have a separate directory per-project. Once you've picked the options you want, click 'Create Project':
+On the next screen, you will have a chance to set your project's name. You may also want to navigate to a different directory to save your project's files in. Under this directory, Castle will create a _new_ 'project directory' for your project, and the project's files wil reside within that new directory. Once you've picked the options you want, click 'Create Project':
 
 !['Create Project' screen](create-project.png)
 
@@ -70,7 +70,7 @@ The initial version of your project should look like this:
 
 ![Initial new project](initial-created-project.png)
 
-We're now ready to start writing some code! Open the 'main.lua' file under the project directory in your code editor and check out the current state of the code: 
+We're now ready to start writing some code! Open the 'main.lua' file under the project directory in your code editor and check out the current state of the code:
 
 ![Initial code](initial-code.png)
 
@@ -94,11 +94,11 @@ Congratulations! You've made your first Castle game code change.
 
 Now let's take a moment to understand the code we wrote. First, we define a function named `love.draw`. What is love? In this case it's [LÖVE](https://love2d.org/), the Lua game framework Castle has built-in to let you code games. LÖVE has a ton of features and functions, which you can learn more about on [its wiki](https://love2d.org/wiki/Main_Page). There's a lot there, but you don't have to worry about digging into it just yet. This tutorial will explain each of the LÖVE features used as they come up. But it's good to know that all of the other LÖVE features are available in Castle, for when you want to go beyond this tutorial and expand your games on your own.
 
-So, back to `love.draw`. When you define the `love.draw` function, LÖVE understands that it needs to call this function whenever it's drawing the screen to display your game. This happens 60 times a second, to keep your game running smoothly. You can [read more about `love.draw`](https://love2d.org/wiki/love.draw) in the LÖVE wiki. From now on, we'll link LÖVE function names to the relevant wiki section for when you want to dig deeper.
+So, back to `love.draw`. LÖVE will run the code in `love.draw` whenever it's drawing the screen to display your game. This happens 60 times a second, to keep your game running smoothly. You can [read more about `love.draw`](https://love2d.org/wiki/love.draw) in the LÖVE wiki. From now on, we'll link LÖVE function names to the relevant wiki section for when you want to dig deeper.
 
 Inside `love.draw`, we use the [`love.graphics.circle`](https://love2d.org/wiki/love.graphics.circle) function to draw a circle on screen. It takes 4 arguments: a drawing `mode` (in our case we use `'fill'` to draw a filled circle, as opposed to just an outline), `x` and `y` coordinates and a `radius`. The coordinate system starts with (0, 0) as the top-left of the game window, with the X-coordinate increasing rightward and the Y-coordinate increasing downward. By default, the width of the game window is 850 units and the height is 400 units. So with the values we put in, we get a little circle on the top-left.
 
-*Note: A 'unit' here doesn't necessarily correspond to on-screen pixels of the user's monitor, since the user is free to resize their Castle window (and thus the game window). In Castle, you don't have to worry about these resizes and can continue assuming 850x450 units--Castle will automatically scale your game's drawing to fit. We will learn later how to use different sizes or even have our own resize logic.*
+_Note: A 'unit' here doesn't necessarily correspond to on-screen pixels of the user's monitor, since the user is free to resize their Castle window (and thus the game window). In Castle, you don't have to worry about these resizes and can continue assuming 850x450 units--Castle will automatically scale your game's drawing to fit. We will learn later how to use different sizes or even have our own resize logic._
 
 The circle is currently white, but let's try making it a nice magenta. Change the code to the following:
 
@@ -117,7 +117,7 @@ Great, so we have a circle on screen, but can we move it around? Let's try it!
 
 ## Reacting to input
 
-Let's try to let the user move the circle around with their keyboard. We used a fixed value of (40, 40) for the position of the circle, but if we use a varying value for that, our circle should move. So let's first add some variables to store this. At the top of your file, add the following:
+Let's try to let the user move the circle around with their keyboard. We used a fixed value of (40, 40) for the position of the circle, but if we change this value over time our circle would move. So let's first add some variables to store this. At the top of your file, add the following:
 
 ```lua
 local x, y = 40, 40
@@ -130,6 +130,29 @@ Then change your `love.graphics.circle` call to this:
 ```
 
 If you reload now your game should be the same as before, and the keyboard doesn't affect anything yet. We need to listen for keyboard input and affect `x` and `y` accordingly. Let's add the following before `love.draw`:
+
+```lua
+function love.update(dt)
+    if love.keyboard.isDown('left') then
+        x = x - 2
+    end
+    if love.keyboard.isDown('right') then
+        x = x + 2
+    end
+    if love.keyboard.isDown('up') then
+        y = y - 2
+    end
+    if love.keyboard.isDown('down') then
+        y = y + 2
+    end
+end
+```
+
+LÖVE runs [`love.update`](https://love2d.org/wiki/love.update) every frame and provides the `dt` parameter which is the amount of time that elapsed in this frame in seconds. Inside, we check if each of the left, right, up or down arrow keys is pressed and update the `x` or `y` values accordingly. If the left arrow key is down, we decrease the `x` coordinate by 2, so that the circle moves leftward. We perform this logic for each arrow key and the coordinate it affects.
+
+If you reload your game now, you should be able to move the circle around with the arrow keys.
+
+To ensure that the circle moves at a constant speed we need to use the `dt` parameter when updating the coordinates. Say we want to move the circle by 120 units each second. That means it would need to move by `120 * dt` each frame, since `dt` is in seconds. So let's change the code in `love.update`:
 
 ```lua
 function love.update(dt)
@@ -148,11 +171,7 @@ function love.update(dt)
 end
 ```
 
-[`love.update`](https://love2d.org/wiki/love.update), like `love.draw`, is a function that LÖVE will call if you define it. In this case the function is called every frame and given the argument `dt` which is the amount of time that elapsed since the last frame in seconds. Inside, we check if each of the left, right, up or down arrow keys is pressed and update the `x` or `y` values accordingly. In this case we pick a speed of 120 units per second. If the left arrow key is down, we decrease the `x` coordinate by the number of units left the circle would've moved in the last frame. We perform this logic for each arrow key and the coordinate it affects.
-
-If you reload your game now, you should be able to move the circle around with the arrow keys.
-
-If both `love.update` and `love.draw` are called every frame, why are they separate? The idea is to only put logic that changes your game state in `love.update`. In this case the state is our `x` and `y` values. Then, we only put logic that draws the current state on the screen in `love.draw`. This way, Castle could stop calling `love.update` but still call `love.draw` in order to pause your game. Or it could go the other way round: call `love.update` but not `love.draw`, to run your game in the background but not draw it for example.
+If both `love.update` and `love.draw` are called every frame, why are they separate? The idea is to only put logic that _updates_ your game in `love.update`. In this case, that would be the code that changes the `x` and `y` values to move the circle. Then we only put logic that _draws_ the game in `love.draw`, which in this case would be the `love.graphics` calls that draw the circle.
 
 To recap, here is the entire code for the game at this point:
 
@@ -291,4 +310,6 @@ Click the card to play your game! Any Castle user can now go to your profile and
 
 ![Click 'Copy Link'](copy-link.png)
 
-Congratulations! You've made a Castle game and added it to your profile. The next tutorial will show you how to add Castle-specific features to your game, such as storing data in a database and making posts.
+Congratulations! You've made a Castle game and added it to your profile. You can update your game at any time by editing the '.castle' file or 'main.lua' and repeating this step.
+
+The next tutorial will show you how to add Castle-specific features to your game, such as storing data in a database and making posts.
