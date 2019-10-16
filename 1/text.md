@@ -1,6 +1,6 @@
 # How to make a game in Castle
 
-Welcome! This tutorial is meant for anyone looking to make their first Castle game. In this tutorial we'll get started with the basics: getting Castle setup, and learning how to draw graphics and react to user input, which form the basis of games. After that, we'll get into the unique social features offered by Castle's platform. These include displaying user avatars in your game, allowing your game to make posts and save data in Castle's database, and making your game multiplayer.
+Welcome! This tutorial is meant for anyone looking to make their first Castle game.
 
 ## Learning goals
 
@@ -70,7 +70,7 @@ The initial version of your project should look like this:
 
 ![Initial new project](initial-created-project.png)
 
-If you don't see the pane along the bottom, you can click the toolbox icon to open it
+If you don't see the pane along the bottom, you can click the toolbox icon to open it.
 
 We're now ready to start writing some code! Navigate to the project directory (you can click the 'Project Url' in the debug pane to do this easily) and then open the 'main.lua' file in your code editor and check out the current state of the code:
 
