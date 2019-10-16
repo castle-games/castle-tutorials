@@ -70,7 +70,9 @@ The initial version of your project should look like this:
 
 ![Initial new project](initial-created-project.png)
 
-We're now ready to start writing some code! Open the 'main.lua' file under the project directory in your code editor and check out the current state of the code:
+If you don't see the pane along the bottom, you can click the toolbox icon to open it
+
+We're now ready to start writing some code! Navigate to the project directory (you can click the 'Project Url' in the debug pane to do this easily) and then open the 'main.lua' file in your code editor and check out the current state of the code:
 
 ![Initial code](initial-code.png)
 
@@ -294,7 +296,7 @@ Now let's add the game to our profile. First, navigate to your profile by clicki
 
 ![Click username](click-username.png)
 
-Then, click 'Add game' on that page:
+Then, click 'Add game' on your user profile page:
 
 ![Click 'Add game'](click-add-game.png)
 
