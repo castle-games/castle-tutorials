@@ -1,6 +1,6 @@
-# Tutorial 1
+# How to make a Castle game
 
-Welcome to the first in a series of tutorials about making games on Castle! In this series we'll first get started with the basics: getting Castle setup, and learning how to draw graphics and react to user input, which form the basis of games. After that, we'll get into the unique social features offered by Castle's platform. These include displaying user avatars in your game, allowing your game to make posts and save data in Castle's database, and making your game multiplayer.
+Welcome! This tutorial is meant for anyone looking to make their first Castle game. In this tutorial we'll get started with the basics: getting Castle setup, and learning how to draw graphics and react to user input, which form the basis of games. After that, we'll get into the unique social features offered by Castle's platform. These include displaying user avatars in your game, allowing your game to make posts and save data in Castle's database, and making your game multiplayer.
 
 ## Learning goals
 
@@ -50,11 +50,11 @@ Now that we've gotten that out of the way, let's actually start our Castle game 
 
 ## Starting a new project
 
-In Castle's sidebar, click 'Create' to navigate to the Create screen:
+Along the top of Castle, click 'Create' to navigate to the Create screen:
 
 ![Click 'Create'](click-create.png)
 
-On the Create screen, you will be presented with many options for starting a new project or opening an existing one. These include templates that start your game with some pre-existing code and images. In this tutorial we want to learn how to write our own code to start things off, so let's click on the 'blank' option:
+On the Create screen, you will be presented with many options for starting a new project or opening an existing one. These include templates that start your game with some pre-existing code and images. In this tutorial we want to learn how to write our own code to start things off, so let's click on the 'New blank project' option:
 
 ![Click 'blank'](click-blank.png)
 
