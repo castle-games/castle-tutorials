@@ -1,10 +1,10 @@
-# How to make a Castle game
+# How to make a game in Castle
 
 Welcome! This tutorial is meant for anyone looking to make their first Castle game. In this tutorial we'll get started with the basics: getting Castle setup, and learning how to draw graphics and react to user input, which form the basis of games. After that, we'll get into the unique social features offered by Castle's platform. These include displaying user avatars in your game, allowing your game to make posts and save data in Castle's database, and making your game multiplayer.
 
 ## Learning goals
 
-Here's a list of things that we can hope to learn in this first tutorial:
+Here's a list of things that we can hope to learn in this tutorial:
 
 - Installing and setting up Castle
 - Software you will need other than Castle itself
@@ -62,7 +62,7 @@ On the next screen, you will have a chance to set your project's name. You may a
 
 !['Create Project' screen](create-project.png)
 
-Once you do this, you will be greeted with the following screen, where you can click 'Open Project' to launch your project in it's current form:
+Once you do this, you will be greeted with the following screen, where you can click 'Run Game!' to launch your project in it's current form:
 
 ![Ready to start making new project](open-created-project.png)
 
@@ -290,7 +290,7 @@ description: I made this game based on Castle tutorial 1! Use your arrow keys to
 coverImage: cover.png
 ```
 
-Now let's add the game to our profile. First, navigate to your profile by clicking on your username in the sidebar:
+Now let's add the game to our profile. First, navigate to your profile by clicking on your username in the sidebar and then clicking the 'Signed in as' text:
 
 ![Click username](click-username.png)
 
