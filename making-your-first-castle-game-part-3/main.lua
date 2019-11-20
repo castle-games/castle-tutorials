@@ -29,11 +29,14 @@ local function resetGame()
 
    enemies = {}
    for index = 1, 5, 1 do
+      local vx, vy = math.random(-2, 2) * 60, math.random(-2, 2) * 60
+      local angle = math.atan2(vy, vx) + math.pi * 0.5
       local enemy = {
          x = math.random(10, screenWidth),
          y = math.random(10, screenHeight),
-         vx = math.random(-2, 2) * 60,
-         vy = math.random(-2, 2) * 60,
+         vx = vx,
+         vy = vy,
+         angle = angle,
          radius = 10,
       }
       table.insert(enemies, enemy)
@@ -43,7 +46,7 @@ end
 local function drawEnemies()
    love.graphics.setColor(1, 1, 1)
    for index, enemy in pairs(enemies) do
-      love.graphics.draw(enemyImage, enemy.x - enemy.radius, enemy.y - enemy.radius)
+      love.graphics.draw(enemyImage, enemy.x - enemy.radius, enemy.y - enemy.radius, enemy.angle)
    end
 end
 
